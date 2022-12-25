@@ -1,3 +1,4 @@
+/*
 let posts = []
 const getAllPosts=()=>{
     fetch('https://jsonplaceholder.typicode.com/posts',{
@@ -15,4 +16,17 @@ const getAllPosts=()=>{
     }).catch(error=>{
         console.log(error)
     })
+}*/
+
+let posts = []
+async function getAllPosts(){
+    const res = await fetch('https://jsonplaceholder.typicode.com/posts',{
+        method:'GET',
+        headers: new Headers({
+            'Content-Type': 'application/json'  // data ana type aka
+        })
+    })
+
+    posts = await res.json();
+    console.log(posts)
 }
