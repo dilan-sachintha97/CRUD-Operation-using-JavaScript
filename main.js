@@ -49,23 +49,27 @@ async function getAllPosts(){
     let dataSet = ''
     posts.forEach(element=>{
        dataSet += `<tr>
-                         <td>
-                            ${element.userId}
-                         </td>
-                         <td>
-                            ${element.id}
-                         </td>
-                         <td>
-                            ${element.title}
-                         </td>
-                         <td>
-                            ${element.body}
-                         </td>
-                         <td>
-                            <button class="btn btn-danger">Delete</button>
-                         </td>
+                        <td>${element.userId}</td><td>${element.id}</td>
+                        <td>${element.title}</td><td>${element.body}</td>
+                        <td><button onclick="deleteComment(${element.id})" class="btn btn-danger">Delete</button></td>
                    </tr>`
     })
     $('tbody').html(dataSet)   // use jqery
     console.log(posts)
+}
+
+async function deleteComment(value){
+    let isOk = confirm(`Are You Sure ?`)   // return ture or false
+
+    if(isOk){
+        const res = await fetch('https://jsonplaceholder.typicode.com/posts/'+value,{
+            method:'DELETE',
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+        })
+        const result = await res.json();
+        console.log(result)
+    }
+
 }
