@@ -90,3 +90,22 @@ async function saveComment(value){
         const result = await res.json();
         console.log(result)
 }
+
+
+
+async function updateComment(value){
+    const res = await fetch('https://jsonplaceholder.typicode.com/posts/'+$('#id').val(),{
+        method:'PUT',
+        body: JSON.stringify({
+            userId :Number($('#userId').val()),
+            id :Number($('#id').val()),
+            title :$('#title').val(),
+            body :$('#comment').val()
+        }),
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
+    })
+    const result = await res.json();
+    console.log(result)
+}
